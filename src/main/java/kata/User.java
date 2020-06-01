@@ -47,15 +47,27 @@ public class User {
     }
 
     public List<Message> viewWall() {
-        List<Message> wallMessages = timeline.getMessages();
-        for (int i = 0; i < usersFollowed.size(); i++) {
-            for (int j = 0; j < usersFollowed.get(i).viewTimelineMessages().size(); j++) {
-                wallMessages.add(usersFollowed.get(i).viewTimelineMessages().get(j));
+        List<Message> wallMessages = new ArrayList<>();
+        for (Message m : timeline.getMessages()) {
+            wallMessages.add(m);
+        }
+        System.out.println("WallMessages before add followers messages: ");
+        for (Message m : wallMessages) {
+            System.out.println(m.getMessageText());
+        }
+        for (User u : usersFollowed) {
+            for (Message m :  u.viewTimelineMessages()) {
+                wallMessages.add(m);
             }
         }
 
         Collections.sort(wallMessages);
         Collections.reverse(wallMessages);
+
+        System.out.println("WallMessages after add followers messages: ");
+        for (Message m : wallMessages) {
+            System.out.println(m.getMessageText());
+        }
 
         return wallMessages;
 

@@ -90,7 +90,16 @@ public class UserTest {
         alice.addFollower(charlie);
         bob.addFollower(charlie);
 
-        assertEquals("Charlie", charlie.viewWall().get(0).getSender().getFirstName());
-        assertEquals("I'm in New York today! Anyone wants to have a coffee?", charlie.viewWall().get(0).getMessageText());
+        assertEquals(charlie.getFirstName(), charlie.viewWall().get(0).getSender().getFirstName());
+        assertEquals(testCharlieMessage.getMessageText(), charlie.viewWall().get(0).getMessageText());
+
+        assertEquals(bob.getFirstName(), charlie.viewWall().get(1).getSender().getFirstName());
+        assertEquals(testBobMessage2.getMessageText(), charlie.viewWall().get(1).getMessageText());
+
+        assertEquals(bob.getFirstName(), charlie.viewWall().get(2).getSender().getFirstName());
+        assertEquals(testBobMessage1.getMessageText(), charlie.viewWall().get(2).getMessageText());
+
+        assertEquals(alice.getFirstName(), charlie.viewWall().get(3).getSender().getFirstName());
+        assertEquals(testAliceMessage.getMessageText(), charlie.viewWall().get(3).getMessageText());
     }
 }
